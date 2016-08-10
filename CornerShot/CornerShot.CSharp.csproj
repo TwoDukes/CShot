@@ -114,6 +114,7 @@
     <Compile Include="Assets\Resources\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\Resources\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Resources\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

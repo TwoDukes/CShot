@@ -54,11 +54,12 @@ public class playerController : MonoBehaviour {
 
     }
 
-    IEnumerator HealthDrop()
+    IEnumerator HealthDrop( float changeAmount)
     {
+
         for(int i = 0; i < 20; i++)
         {
-            health -= 0.5f;
+            health += changeAmount/20;
             yield return new WaitForSeconds(0.01f);
             
         }
@@ -79,6 +80,7 @@ public class playerController : MonoBehaviour {
             {
                 child.gameObject.SetActive(false);
             }
+            
         }
             
 
@@ -153,7 +155,18 @@ public class playerController : MonoBehaviour {
         {
 
             Destroy(other.gameObject);
-            StartCoroutine("HealthDrop");
+            StartCoroutine("HealthDrop", -10);
+        }
+        if (other.tag == "health")
+        {
+            int healthChange = 15;
+
+            if(health < 100 - healthChange)
+                StartCoroutine("HealthDrop", healthChange);
+            else if(health == 100)
+                score += 100;
+            else
+                StartCoroutine("HealthDrop", 100 - health);
         }
     }
 
@@ -169,7 +182,21 @@ public class playerController : MonoBehaviour {
         current = topLeft;
         StartCoroutine("Move", topLeft);
 
-        foreach(Transform child in transform)
+        foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("red"))
+        {
+            Destroy(Obj);
+        }
+        foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("green"))
+        {
+            Destroy(Obj);
+        }
+        foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("health"))
+        {
+            Destroy(Obj);
+        }
+
+
+        foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
         }

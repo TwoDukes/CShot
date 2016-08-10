@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EmitterBase : MonoBehaviour {
 
-    public GameObject Red, Green;
+    public GameObject Red, Green, health;
     public int shots, shotsTarget;
     public float speed, startDelay;
     bool firing = true;
@@ -34,20 +34,24 @@ public class EmitterBase : MonoBehaviour {
 
     IEnumerator Spawn()
     {
-        GameObject tempG, tempR;
+        GameObject tempG, tempR, tempH;
         yield return new WaitForSeconds(0.5f);
 
         while (firing) {
-            float rand = Random.Range(0, 4);
-            if(rand < 3)
+            float rand = Random.Range(0, 10);
+            if(rand < 6)
             {
                 tempR = Instantiate(Red, transform.position, Quaternion.identity) as GameObject;
                 //tempR.transform.parent = gameObject.transform;
             }
+            else if( rand < 9)
+            {
+               tempG = Instantiate(Green, transform.position, Quaternion.identity) as GameObject;
+                //tempG.transform.parent = gameObject.transform;
+            }
             else
             {
-                tempG = Instantiate(Green, transform.position, Quaternion.identity) as GameObject;
-                //tempG.transform.parent = gameObject.transform;
+                tempH = Instantiate(health, transform.position, Quaternion.identity) as GameObject;
             }
             yield return new WaitForSeconds(startDelay);
             shots++;
